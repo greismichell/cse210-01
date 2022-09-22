@@ -1,5 +1,6 @@
 #CSE-210, Week 2: Tic-Tac-Toe Game, Autor: Greis Michell Garcia Villanueva
 
+
 class adding:
     MAGENTA = '\033[95m'
     BLUE = '\033[94m'
@@ -26,40 +27,54 @@ def main():
         keys.append(key)
 
     print('\n'+ adding.GREEN + 'Welcome to Tic-Tac-Toe Game' + adding.ENDC + '\n')
-   
-    for i in range(10):
-        the_board(board_game_1)
-       
-        move = int(input(f"{turn}'s turn to choose a square by typing its number (choose wisely): "))
-        move= move-1
-
-        if board_game_1[move] == '1' or board_game_1[move] == '2' or board_game_1[move] == '3' or board_game_1[move] == '4' or board_game_1[move] == '5' or board_game_1[move] == '6' or board_game_1[move] == '7' or board_game_1[move] == '8' or board_game_1[move] == '9':
-            board_game_1[move] = turn
-            count += 1
-        else:
-            print(adding.RED + 'this place is unvalaible' + adding.ENDC)
-            continue
-   
-    #finding the winner
-        if count >=5:
+    while True: 
+        for i in range(10):
             the_board(board_game_1)
-            #win through the horizontal top
-            if check_winner(board_game_1):
-                
-                game_over
-                winner_messeage(turn)
-                break
            
-        if count == 9:
-            game_over
-            print(adding.GREEN + 'It is a tie!' + adding.ENDC)
-        if turn == adding.BLUE + 'X' + adding.ENDC:
-            turn= adding.YELLOW + 'O' + adding.ENDC
-        else:
-            turn= adding.BLUE + 'X' + adding.ENDC
-
-        
-
+            move = input(f"{turn}'s turn to choose a square by typing its number (choose wisely): ")
+    
+            try:
+                move = int(move)
+                move= move-1
+                    
+            
+                if board_game_1[move] == '1' or board_game_1[move] == '2' or board_game_1[move] == '3' or board_game_1[move] == '4' or board_game_1[move] == '5' or board_game_1[move] == '6' or board_game_1[move] == '7' or board_game_1[move] == '8' or board_game_1[move] == '9':
+                    board_game_1[move] = turn
+                    count += 1
+                else:
+                    print(adding.MAGENTA + 'this place is unvalaible' + adding.ENDC)
+                    continue
+            
+                #finding the winner
+                if count >=5:
+                    the_board(board_game_1)
+                    #win through the horizontal top
+                    if check_winner(board_game_1):
+                        
+                        game_over()
+                        winner_messeage(turn)
+                        break
+                   
+                if count == 9:
+                    game_over()
+                    print(adding.GREEN + 'It is a tie!' + adding.ENDC)
+    
+                if turn == adding.BLUE + 'X' + adding.ENDC:
+                    turn= adding.YELLOW + 'O' + adding.ENDC
+                else:
+                    turn= adding.BLUE + 'X' + adding.ENDC
+            except:
+                print(adding.RED + 'Invalid answer, try again' + adding.ENDC)
+                continue
+    
+        new_game= input('Do you want to play again? (Y/N): ').upper()
+        if new_game == 'Y':
+            continue
+        elif new_game == 'N':
+            print(adding.GREEN + 'OK, maybe the next time.' + adding.ENDC)   
+            break
+            
+            
 #funtion to print the board game 
 def the_board(position):
     print('\n')
@@ -70,15 +85,17 @@ def the_board(position):
     print(position[6] + '|' + position[7] + '|' + position[8])
     print('\n')
 
+#this funtion set the winner message
 def winner_messeage(turn):
-    print('\n' + adding.MAGENTA + f'the player {turn} won this game! Well done!' + adding.ENDC + '\n')
+    print('\n' + adding.OCEAN + adding.BOLD + f'Congratulations, {turn}' + adding.OCEAN + '´s player!' + adding.OCEAN + ' You won this game! Well done!' + adding.ENDC + '\n')
 
 def game_over():
     print(adding.RED + adding.BOLD + 'Game Over' + adding.ENDC)
 
+#This funtion check all condition to win.
 def check_winner(board_game_1):
     return (board_game_1[0] == board_game_1[1] == board_game_1[2]) or (board_game_1[3] == board_game_1[4] == board_game_1[5]) or (board_game_1[6] == board_game_1[7] == board_game_1[8]) or (board_game_1[0] == board_game_1[3] == board_game_1[6]) or (board_game_1[0] == board_game_1[4] == board_game_1[8]) or (board_game_1[1] == board_game_1[4] == board_game_1[7]) or (board_game_1[2] == board_game_1[5] == board_game_1[8]) or (board_game_1[2] == board_game_1[4] == board_game_1[6])
-    
+
 
 if __name__=='__main__':
     main()
