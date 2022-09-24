@@ -27,7 +27,7 @@ def main():
         keys.append(key)
 
     print('\n'+ adding.GREEN + 'Welcome to Tic-Tac-Toe Game' + adding.ENDC + '\n')
-    while True: 
+    while True:
         while True:
             the_board(board_game_1)
            
@@ -37,7 +37,6 @@ def main():
                 move = int(move)
                 move= move-1
                     
-            
                 if board_game_1[move] == '1' or board_game_1[move] == '2' or board_game_1[move] == '3' or board_game_1[move] == '4' or board_game_1[move] == '5' or board_game_1[move] == '6' or board_game_1[move] == '7' or board_game_1[move] == '8' or board_game_1[move] == '9':
                     board_game_1[move] = turn
                     count += 1
@@ -48,9 +47,9 @@ def main():
                 #finding the winner
                 if count >=5:
                     the_board(board_game_1)
-                    #win through the horizontal top
+                    #calling the fuction that set all posible ways to win
                     if check_winner(board_game_1):
-                        
+                        #calling the functions that set property messages
                         game_over()
                         winner_messeage(turn)
                         break
@@ -67,16 +66,26 @@ def main():
             except:
                 print(adding.RED + 'Invalid answer, try again' + adding.ENDC)
                 continue
-    
+        #To start a new game.
         new_game= input('Do you want to play again? (Y/N): ').upper()
+        
         if new_game == 'Y':
+            print(adding.OCEAN + 'good choice! A New start gives us new oportunities to win!\n' + adding.ENDC)
             continue
         elif new_game == 'N':
-            print(adding.GREEN + 'OK, maybe the next time.' + adding.ENDC)   
-            break
-
-            
-#funtion to print the board game 
+            print(adding.GREEN + 'OK, maybe the next time.' + adding.ENDC)      
+            break 
+        else:
+            #This part give you one more oportunity to enter your answer again if you make a mistake the first time.
+            print(adding.RED + 'Invalid answer, try again' + adding.ENDC)
+            new_game= input('Do you want to play again? (enter "Y" to continue or any other key to leave): ').upper()
+            if new_game == 'Y':
+                print(adding.OCEAN + 'good choice! A New start gives us new oportunities to win!\n' + adding.ENDC)
+                continue
+            else:
+                break
+       
+#function to print the board game 
 def the_board(position):
     print('\n')
     print(position[0] + '|' + position[1] + '|' + position[2])
@@ -86,14 +95,14 @@ def the_board(position):
     print(position[6] + '|' + position[7] + '|' + position[8])
     print('\n')
 
-#this funtion set the winner message
+#this function set the winner message
 def winner_messeage(turn):
     print('\n' + adding.OCEAN + adding.BOLD + f'Congratulations, {turn}' + adding.OCEAN + '´s player!' + adding.OCEAN + ' You won this game! Well done!' + adding.ENDC + '\n')
 
 def game_over():
     print(adding.RED + adding.BOLD + 'Game Over' + adding.ENDC)
 
-#This funtion check all condition to win.
+#This function check all conditions to win.
 def check_winner(board_game_1):
     return (board_game_1[0] == board_game_1[1] == board_game_1[2]) or (board_game_1[3] == board_game_1[4] == board_game_1[5]) or (board_game_1[6] == board_game_1[7] == board_game_1[8]) or (board_game_1[0] == board_game_1[3] == board_game_1[6]) or (board_game_1[0] == board_game_1[4] == board_game_1[8]) or (board_game_1[1] == board_game_1[4] == board_game_1[7]) or (board_game_1[2] == board_game_1[5] == board_game_1[8]) or (board_game_1[2] == board_game_1[4] == board_game_1[6])
 
