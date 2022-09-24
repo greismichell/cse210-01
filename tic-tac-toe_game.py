@@ -28,10 +28,10 @@ def main():
 
     print('\n'+ adding.GREEN + 'Welcome to Tic-Tac-Toe Game' + adding.ENDC + '\n')
     while True: 
-        for i in range(10):
+        while True:
             the_board(board_game_1)
            
-            move = input(f"{turn}'s turn to choose a square by typing its number (choose wisely): ")
+            move = input(f"{turn}'s your turn to choose a square by typing its number (choose wisely): ")
     
             try:
                 move = int(move)
@@ -57,7 +57,8 @@ def main():
                    
                 if count == 9:
                     game_over()
-                    print(adding.GREEN + 'It is a tie!' + adding.ENDC)
+                    print(adding.GREEN + 'It is a tie! Good players share the victory!\n'  + adding.ENDC)
+                    break
     
                 if turn == adding.BLUE + 'X' + adding.ENDC:
                     turn= adding.YELLOW + 'O' + adding.ENDC
@@ -73,7 +74,7 @@ def main():
         elif new_game == 'N':
             print(adding.GREEN + 'OK, maybe the next time.' + adding.ENDC)   
             break
-            
+
             
 #funtion to print the board game 
 def the_board(position):
